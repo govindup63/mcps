@@ -1,10 +1,10 @@
 apiVersion: kro.run/v1alpha1
 kind: MCP
 metadata:
-  name: something
+  name: anything
   namespace: hackman-hackathon
 spec:
-  name: something
+  name: anything
   image: govindup63/plane:42cf7cc71dea45a9019fcb87dbfb1a08c34e5563
   replicas: 1
   namespace: hackman-hackathon
