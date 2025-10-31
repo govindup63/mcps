@@ -9,7 +9,7 @@ spec:
     spec:
       name: string
       image: string
-      replicas: number | default=1
+      replicas: integer | default=1
       namespace: string | default="default"
       user: string | default="default"
       containerPort: number | default=3000
