@@ -8,6 +8,7 @@ spec:
   image: govindup63/test-mcp:10
   replicas: 1
   namespace: hackman-hackathon
+  containerPort: 8080
   ingress:
     enabled: true
     url: test.ghstmail.me
