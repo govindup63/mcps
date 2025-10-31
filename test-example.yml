@@ -6,9 +6,9 @@ spec:
   name: example-mcp
   image: govindup63/test-mcp:6
   replicas: 1
+  namespace: hackman-hackathon
   ingress:
     enabled: true
     url: test.ghstmail.me
     path: /
     pathType: Prefix
-  namespace: hackman-hackathon
