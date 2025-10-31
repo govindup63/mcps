@@ -1,0 +1,98 @@
+apiVersion: kro.run/v1alpha1
+kind: ResourceGraphDefinition
+metadata:
+  name: rgd-mcp
+spec:
+  schema:
+    apiVersion: v1alpha1
+    kind: MCP
+    spec:
+      name: string
+      image: string
+      replicas: number | default=1
+      namespace: string | default="default"
+      user: string | default="default"
+      containerPort: number | default=3000
+      ingress:
+        enabled: boolean | default=false
+        url: string
+        pathType: string | default="Prefix"
+        path: string | default="/"
+      
+      
+    status:
+      # Fields the controller will inject into instances status.
+      deploymentConditions: ${deployment.status.conditions}
+      availableReplicas: ${deployment.status.availableReplicas}
+
+  # Define the resources this API will manage.
+  resources:
+    - id: deployment
+      template:
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          namespace: ${schema.spec.namespace}
+          name: ${schema.spec.name} 
+        spec:
+          replicas: ${schema.spec.replicas}
+          selector:
+            matchLabels:
+              app: ${schema.spec.name}
+              user: ${schema.spec.user}
+
+          template:
+            metadata:
+              labels:
+                app: ${schema.spec.name}
+                user: ${schema.spec.user}
+            spec:
+              containers:
+                - name: ${schema.spec.name}
+                  image: ${schema.spec.image} 
+                  ports:
+                    - containerPort: ${schema.spec.containerPort}
+
+    - id: service
+      template:
+        apiVersion: v1
+        kind: Service
+        metadata:
+          namespace: ${schema.spec.namespace}
+          name: ${schema.spec.name}-service
+        spec:
+          selector: ${deployment.spec.selector.matchLabels} 
+          ports:
+            - protocol: TCP
+              port: 80
+              targetPort: ${schema.spec.containerPort}
+
+    - id: ingress
+      includeWhen:
+        - ${schema.spec.ingress.enabled} 
+      template:
+        apiVersion: networking.k8s.io/v1
+        kind: Ingress
+        metadata:
+          namespace: ${schema.spec.namespace}
+          name: ${schema.spec.name}-ingress
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-prod"
+            acme.cert-manager.io/http01-ingress-class: "nginx"
+        spec:
+          ingressClassName: nginx
+          tls:
+            - hosts:
+                - ${schema.spec.ingress.url}
+              secretName: ${schema.spec.name}-tls
+          rules:
+            - host: ${schema.spec.ingress.url}
+              http:
+                paths:
+                  - path: ${schema.spec.ingress.path}
+                    pathType: ${schema.spec.ingress.pathType}
+                    backend:
+                      service:
+                        name: ${schema.spec.name}-service 
+                        port:
+                          number: 80
