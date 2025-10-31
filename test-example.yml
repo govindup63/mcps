@@ -5,7 +5,7 @@ metadata:
   namespace: hackman-hackathon
 spec:
   name: example-mcp
-  image: govindup63/test-mcp:6
+  image: govindup63/test-mcp:7
   replicas: 1
   namespace: hackman-hackathon
   ingress:
