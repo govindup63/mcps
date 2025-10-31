@@ -11,6 +11,6 @@ spec:
   containerPort: 8080
   ingress:
     enabled: true
-    url: test.ghstmail.me
+    url: shivansh.ghstmail.me
     path: /
     pathType: Prefix
