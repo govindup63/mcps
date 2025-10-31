@@ -12,7 +12,7 @@ spec:
       replicas: integer | default=1
       namespace: string | default="default"
       user: string | default="default"
-      containerPort: number | default=3000
+      containerPort: integer | default=3000
       ingress:
         enabled: boolean | default=false
         url: string
