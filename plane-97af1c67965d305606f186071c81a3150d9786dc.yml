@@ -1,0 +1,16 @@
+apiVersion: kro.run/v1alpha1
+kind: MCP
+metadata:
+  name: mystic-pegasus-61
+  namespace: hackman-hackathon
+spec:
+  name: mystic-pegasus-61
+  image: govindup63/plane:97af1c67965d305606f186071c81a3150d9786dc
+  replicas: 1
+  namespace: hackman-hackathon
+  containerPort: 8080
+  ingress:
+    enabled: true
+    url: mystic-pegasus-61.ghstmail.me
+    path: /
+    pathType: Prefix
