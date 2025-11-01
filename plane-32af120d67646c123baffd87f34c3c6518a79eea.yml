@@ -1,0 +1,16 @@
+apiVersion: kro.run/v1alpha1
+kind: MCP
+metadata:
+  name: crimson-shark-661
+  namespace: hackman-hackathon
+spec:
+  name: crimson-shark-661
+  image: govindup63/plane:32af120d67646c123baffd87f34c3c6518a79eea
+  replicas: 1
+  namespace: hackman-hackathon
+  containerPort: 8080
+  ingress:
+    enabled: true
+    url: crimson-shark-661.ghstmail.me
+    path: /
+    pathType: Prefix
