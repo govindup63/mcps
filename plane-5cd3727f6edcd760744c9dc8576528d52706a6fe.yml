@@ -1,0 +1,16 @@
+apiVersion: kro.run/v1alpha1
+kind: MCP
+metadata:
+  name: swift-falcon-687
+  namespace: hackman-hackathon
+spec:
+  name: swift-falcon-687
+  image: govindup63/plane:5cd3727f6edcd760744c9dc8576528d52706a6fe
+  replicas: 1
+  namespace: hackman-hackathon
+  containerPort: 8080
+  ingress:
+    enabled: true
+    url: swift-falcon-687.ghstmail.me
+    path: /
+    pathType: Prefix
