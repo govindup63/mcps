@@ -1,0 +1,16 @@
+apiVersion: kro.run/v1alpha1
+kind: MCP
+metadata:
+  name: crystal-lion-33
+  namespace: hackman-hackathon
+spec:
+  name: crystal-lion-33
+  image: govindup63/plane:42c28ca252c61c8ad2b62f62a4a3bd9f15c753ea
+  replicas: 1
+  namespace: hackman-hackathon
+  containerPort: 8080
+  ingress:
+    enabled: true
+    url: crystal-lion-33.ghstmail.me
+    path: /
+    pathType: Prefix
