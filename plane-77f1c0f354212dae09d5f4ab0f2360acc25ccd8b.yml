@@ -1,0 +1,16 @@
+apiVersion: kro.run/v1alpha1
+kind: MCP
+metadata:
+  name: happy-dolphin-921
+  namespace: hackman-hackathon
+spec:
+  name: happy-dolphin-921
+  image: govindup63/plane:77f1c0f354212dae09d5f4ab0f2360acc25ccd8b
+  replicas: 1
+  namespace: hackman-hackathon
+  containerPort: 8080
+  ingress:
+    enabled: true
+    url: happy-dolphin-921.ghstmail.me
+    path: /
+    pathType: Prefix
