@@ -1,0 +1,16 @@
+apiVersion: kro.run/v1alpha1
+kind: MCP
+metadata:
+  name: emerald-raven-922
+  namespace: hackman-hackathon
+spec:
+  name: emerald-raven-922
+  image: govindup63/plane:4b3e295f94e3ad349f1e6e3509993808801684e6
+  replicas: 1
+  namespace: hackman-hackathon
+  containerPort: 8080
+  ingress:
+    enabled: true
+    url: emerald-raven-922.ghstmail.me
+    path: /
+    pathType: Prefix
