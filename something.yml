@@ -1,5 +1,0 @@
-# Kubernetes manifest to create the namespace 'hackman-hackathon'
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: hackman-hackathon
